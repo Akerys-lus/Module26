@@ -6,8 +6,8 @@ import platform
 import sys
 
 info = 'OS info is \n{}\n\nPython version is {} {}'.format(
-    platform.uname(),
-    sys.version,
+    platform.uname('windows'),
+    sys.version('10, для образовательных учреждений'),
     platform.architecture(),
 )
 print(info)
