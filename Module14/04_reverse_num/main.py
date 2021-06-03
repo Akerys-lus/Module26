@@ -1,29 +1,26 @@
-# first_number = input('Введите число: ')
-# second_number = input('Введите число: ')
-num = float(input(''))
-
-
 def vice_num(num):
-    num = str(num)
     whole_part = int(num)
+    num = str(num)
     vice_head = ''
     vice_end = ''
     num_end = float(num) - whole_part
-    while int(num_end) / float(num) != 1:
+    while int(num_end) / float(num_end) != 1.0:
         num_end *= 10
-    num_end = str(num_end)
-    for sym in num:
-        if sym == '.':
-            vice_head = vice_head + sym
-        vice_head = sym + vice_head
+    num_end = str(int(num_end))
+    for sym in str(whole_part):
+        vice_head += sym
+    vice_head += '.'
 
     for sym in num_end:
-        vice_end = sym + vice_end
+        vice_end += sym
     vice = vice_head + vice_end
-    print(vice)
     return vice
 
+number_one = float(input('Введите первое число: '))
+number_two = float(input('Введите первое число: '))
+number_one = vice_num(number_one)
+number_two = vice_num(number_two)
+print('Первое число наоборот:', float(number_one))
+print('Второе число наоборот:', float(number_two))
 
-# summ_num = float(vice_num(first_number)) + float(vice_num(second_number))
-vice_num(num)
-# print(summ_num)
+print('Сумма чисел:', float(number_one) + float(number_two))
