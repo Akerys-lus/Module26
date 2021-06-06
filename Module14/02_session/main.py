@@ -15,8 +15,8 @@ elif y_diff == 0:
     b = (x2 - x1) * (k / 2)
 else:
 
-  k = y_diff / x_diff
-  b = y2 - k * x2
+    k = y_diff / x_diff
+    b = y2 - k * x2
 
 
 print("Уравнение прямой, проходящей через эти точки:")
