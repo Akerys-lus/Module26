@@ -1,19 +1,19 @@
 num = int(input('Введите число: '))
 
 def summ_num(num):
-  summ = 0
-  while num > 0:
-    n = num % 10
-    summ += n
-    num //= 10
-  return summ
+    summ = 0
+    while num > 0:
+        n = num % 10
+        summ += n
+        num //= 10
+    return summ
 
 def count_num(num):
-  count = 0
-  while num > 0:
-    count += 1
-    num //= 10
-  return count
+    count = 0
+    while num > 0:
+        count += 1
+        num //= 10
+    return count
 
 
 
