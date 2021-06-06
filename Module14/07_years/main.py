@@ -1,4 +1,4 @@
-a = int(input())
+a = int(input(''))
 b = int(input())
 while a < b:
     for i in range(4):
