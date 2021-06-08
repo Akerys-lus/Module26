@@ -16,6 +16,7 @@ def vice_num(num):
     vice = vice_head + vice_end
     return vice
 
+
 number_one = float(input('Введите первое число: '))
 number_two = float(input('Введите первое число: '))
 number_one = vice_num(number_one)

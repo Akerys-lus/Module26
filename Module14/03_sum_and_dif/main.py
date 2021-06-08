@@ -1,6 +1,6 @@
 num = int(input('Введите число: '))
 
-def summ_num(num):
+def summ_num(num):  # TODO попрвьте стиль кода, используйте меню Code/Reformat Code
     summ = 0
     while num > 0:
         n = num % 10
