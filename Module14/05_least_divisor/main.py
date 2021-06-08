@@ -1,4 +1,4 @@
-n = int(input(''))
+n = int(input('Введите число: '))
 i = 1
 while i <= n:
     i = i + 1
