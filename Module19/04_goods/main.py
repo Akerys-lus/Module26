@@ -24,4 +24,12 @@ store = {
     ],
 }
 
-# TODO здесь писать код
+for item in goods:
+    name = item
+    number_name = goods[name]
+    count = 0
+    price = 0
+    for i in range(0, len(store[number_name])):
+        count += store[number_name][i]['quantity']
+        price += store[number_name][i]['quantity'] * store[number_name][i]['price']
+    print(name, '-', count, 'шт. Стоимость', price, 'руб.')
