@@ -24,12 +24,13 @@ store = {
     ],
 }
 
-for item in goods:
-    name = item
+for item in goods:  # TODO скорее это name
+    name = item  # TODO лишняя переменная
     number_name = goods[name]
     count = 0
     price = 0
-    for i in range(0, len(store[number_name])):
+    for i in range(0, len(store[number_name])):  # TODO итерируйте по списку store[goods[name]]: тогда код будет проще,
+                                                 #  а вместь i назовите item
         count += store[number_name][i]['quantity']
         price += store[number_name][i]['quantity'] * store[number_name][i]['price']
     print(name, '-', count, 'шт. Стоимость', price, 'руб.')
