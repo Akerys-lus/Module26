@@ -21,4 +21,21 @@ for i in range(max_number):
         print('Артём мог загадать следующие числа:', numbers)
         break
 
+# TODO Покажу вариант решения:
+max_number = int(input('Введите максимальное число: '))
+all_nums = set(range(1, max_number + 1))
+possible_nums = all_nums
+
+while True:
+    guess = input('Нужное число есть среди вот этих чисел: ')
+    if guess == 'Помогите!':
+        break
+    guess = {int(i_num) for i_num in guess.split()}
+    answer = input('Ответ Артёма: ').lower()
+    if answer == 'да':
+        possible_nums &= guess
+    else:
+        possible_nums -= guess
+
+print('Артём мог загадать следующие числа:', sorted(possible_nums))
 
