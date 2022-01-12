@@ -20,7 +20,7 @@ students = {
 }
 
 
-def func_stud(dict):
+def func_stud(dict):  # TODO dict это встроенное имя, возьмите уникальное имя для параметра
     lst = []
     string = 0
     for id_stud in dict:
