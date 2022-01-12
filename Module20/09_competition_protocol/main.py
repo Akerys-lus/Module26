@@ -1,6 +1,6 @@
 count_rec = int(input('Сколько записей вносится в протокол? '))
 list_players = {}
-reverse_list = ()
+
 count = 0
 print('Записи (результат и имя): ')
 
