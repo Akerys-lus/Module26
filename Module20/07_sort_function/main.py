@@ -1,12 +1,11 @@
 def sort_tpl(lst):
     flag = True
     for i in lst:
-        if float(i) != int(i):
+        if type(i) != int:
             flag = False
 
     if flag:
         lst = tuple(sorted(lst))
-        return lst
     else:
         return lst
-
+    return lst

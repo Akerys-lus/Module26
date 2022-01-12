@@ -20,12 +20,12 @@ students = {
 }
 
 
-def func_stud(dict):
+def func_stud(ready_list):
     lst = []
     string = 0
-    for id_stud in dict:
-        lst += (dict[id_stud]['interests'])
-        string += len(dict[id_stud]['surname'])
+    for id_stud in ready_list:
+        lst += (ready_list[id_stud]['interests'])
+        string += len(ready_list[id_stud]['surname'])
     return lst, string
 
 
