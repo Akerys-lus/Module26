@@ -17,7 +17,6 @@ for i_rec in range(1, count_rec + 1):
 sorted_values = sorted(list_players.values())
 sorted_dict = {}
 
-
 for i in sorted_values[::-1]:
     for k in list_players.keys():
         if list_players[k] == i:
@@ -25,7 +24,6 @@ for i in sorted_values[::-1]:
     print(sorted_dict)
 
 print('\nИтоги соревнований:')
-
 
 for i_score, i_name in sorted_dict.items():
     if count >= 3:

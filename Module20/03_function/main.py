@@ -8,4 +8,3 @@ def slicer(i_tuple, element):
             return i_tuple[i_tuple.index(element)]
     else:
         return ()
-
