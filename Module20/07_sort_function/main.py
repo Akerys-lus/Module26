@@ -6,6 +6,7 @@ def sort_tpl(lst):
 
     if flag:
         lst = tuple(sorted(lst))
-    else:
+    else:  # TODO вся эта ветка else не нужна, если её убрать, список всё равно вернётся следующей командой после
+           #  условного оператора
         return lst
     return lst
