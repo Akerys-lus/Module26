@@ -6,6 +6,5 @@ def sort_tpl(lst):
 
     if flag:
         lst = tuple(sorted(lst))
-    else:
-        return lst
+
     return lst
