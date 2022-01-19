@@ -1,4 +1,5 @@
 def func_fibonacci(pos_num, first_num=1, second_num=1):
+    # TODO сделайте рекурсивной функцией, она буквально в три строки
     i_position = 0
     while i_position < pos_num - 2:
         sum_num = first_num + second_num

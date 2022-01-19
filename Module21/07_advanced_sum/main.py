@@ -8,3 +8,10 @@ def summ(*args):
                 result.extend(flatten(e))
             return result
     return sum(flatten(args))
+
+
+print(summ([[1, 2, [3]], [1], 3]))
+print(summ(1, 2, 3, 4, 5))
+# TODO Результат:
+#  1
+#  1

@@ -1,5 +1,4 @@
 def sequence_numb(num, count):
-    numb = num - (num - count)
     count += 1
     print(count)
     if count < num:

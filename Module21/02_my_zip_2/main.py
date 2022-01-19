@@ -6,3 +6,4 @@ def seq_range(txt, tpl):
 # tuple_list = (10, 20, 30, 40)
 # pairs = [seq_range(text[i], tuple_list[i]) for i in range(min(len(text), len(tuple_list)))]
 # print('Строка: {}\nКортеж чисел: {}'.format(text, tuple_list))
+# TODO Эта задача аналогична задаче 10 из прошлого модуля

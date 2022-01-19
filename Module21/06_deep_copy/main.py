@@ -30,6 +30,8 @@ for _ in range(number_sites):
     key_sites = {'title': f'Куплю/продам {product_name} недорого', 'h2': f'У нас самая низкая цена на {product_name}'}
     for i in key_sites:
         find_key(site, i, key_sites[i])
-
+        # TODO тут два основных момента:
+        #  1) надо составлять список
+        #  2) переменную site запрещено менять, работать надо с её "глубокими копиями"  (copy.deepcopy)
     print(f'Сайт для {product_name}:')
     print(site)
