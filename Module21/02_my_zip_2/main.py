@@ -1,5 +1,5 @@
 def seq_range(txt, tpl):
-    pairs = ((text[i], tuple_list[i]) for i in range(min(len(text), len(tuple_list))))
+    pairs = ((txt[i], tpl[i]) for i in range(min(len(txt), len(tpl))))   # используйте параметры, а не глобальные переменные
     print(pairs)
     print(list(pairs))
 

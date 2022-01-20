@@ -17,7 +17,7 @@ site = {
 def find_key(struct, key, meaning):
     if key in struct:
         struct[key] = meaning
-        return site_copy
+        return site
 
     for sub_struct in struct.values():
         if isinstance(sub_struct, dict):
@@ -26,13 +26,13 @@ def find_key(struct, key, meaning):
                 return site
 
 
-site_copy = copy.deepcopy(site)
+# site_copy = copy.deepcopy(site)  копировать надо каждый раз передавая данные функции find_key
 number_sites = int(input('Сколько сайтов: '))
 for _ in range(number_sites):
     product_name = input('Введите название продукта для нового сайта: ')
     key_sites = {'title': f'Куплю/продам {product_name} недорого', 'h2': f'У нас самая низкая цена на {product_name}'}
     for i in key_sites:
-        find_key(site_copy, i, key_sites[i])
+        new_site = find_key(copy.deepcopy(site), i, key_sites[i])  # показал
 
     print(f'Сайт для {product_name}:')
-    print(site)
+    print(new_site)
