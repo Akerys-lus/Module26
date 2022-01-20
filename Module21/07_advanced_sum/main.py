@@ -6,5 +6,8 @@ def summ(*args):
                 result.append(e)
             else:
                 result.extend(flatten(e))
-            return result
+        return result
+
     return sum(flatten(args))
+
+
