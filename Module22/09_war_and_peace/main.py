@@ -32,6 +32,8 @@ for i_val in sorted_values[::-1]:
         if frequency_dict[i_key] == i_val:
             sorted_dict[i_key] = i_val
 
-
 for i_let, i_frequency in sorted_dict.items():
     print(i_let, ':', i_frequency)
+
+open_zip.close()
+zip_archive.close()
