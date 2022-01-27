@@ -14,6 +14,10 @@ def file_sizes(pth):
         else:
             files_stat[0] += (file_sizes(os.path.abspath(os.path.join(pth, i_elem))))[0]
             files_stat[1] += (file_sizes(os.path.abspath(os.path.join(pth, i_elem))))[1]
+            # TODO 1) есть лишние скобки (самые "общие")
+            #  2) ту дважды рекурсивно вызывается функция, это очень избыточно - вызовите её один раз, присвойте
+            #  результат переменной, а далее используйте её где это нужно. Не забывайте про распаковку списков - это
+            #  удобно
             files_stat[2] += 1
     return files_stat
 
