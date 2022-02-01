@@ -14,21 +14,21 @@ new_txt = ''
 
 for i_len in text:
     for i_symb in i_len:
-        if i_symb in 'abcdefghijklmnopqrstuvwxyz':
+        if i_symb.lower() in 'abcdefghijklmnopqrstuvwxyz':
             new_txt += i_symb
 
 frequency_letter(new_txt, frequency_dict)
 
 analysis_txt = open('analysis.txt', 'w')
 
+
 sorted_values = sorted(frequency_dict.values())
 sorted_dict = {}
 
 for i_val in sorted_values[::-1]:
-    for i_key in frequency_dict.keys():
+    for i_key in sorted(frequency_dict.keys()):
         if frequency_dict[i_key] == i_val:
             sorted_dict[i_key] = i_val
-
 
 for i_let, i_frequency in sorted_dict.items():
     string = i_let + ' ' + str(i_frequency) + '\n'
