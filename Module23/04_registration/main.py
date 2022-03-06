@@ -42,3 +42,4 @@ with open('registrations_.txt', mode='r', encoding='utf-8') as ff:
             good = open('registraton_good.log', mode='a', encoding='utf-8')
             good.write(line + '\n')
             good.close()
+

@@ -18,3 +18,4 @@ for i_len in file_txt:
         print('В {} строке меньше трёх символов.'.format(count_len))
 
 print('Общее кол-во символов: ', sum_symb)
+
