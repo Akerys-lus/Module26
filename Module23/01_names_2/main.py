@@ -9,7 +9,7 @@ for i_len in file_txt:
         if i_symb.isalpha():
             count_symb_len += 1
     try:
-        if count_symb_len > 3:
+        if count_symb_len > 3:  # TODO не верное условие, истинно для имён от 4х символов, а надо от 3х
             sum_symb += count_symb_len
         else:
             sum_symb += count_symb_len
