@@ -1,35 +1,44 @@
-lst_name = []
-good_logs = open('registrations_good.log', 'w', encoding='utf-8')
-bad_logs = open('registrations_bad.log', 'w', encoding='utf-8')
-try:
-    with open('registrations.txt', 'r', encoding='utf-8') as fh:
-        for i_line in fh:
-            lst_name.append(i_line.strip().split())
-except FileNotFoundError:
-    print('Файл не найден.')
+class NotNameError(Exception):
+    pass
 
-for i_elem in lst_name:
-    str_elem = ''
-    if 3 > len(i_elem):
-        if not i_elem == '\n':
-            for ind in i_elem:
-                str_elem += str(ind)
-            bad_logs.write(str_elem
-                           + ' ' * 8 + 'НЕ присутствуют все три поля: IndexError\n')
+
+class NotEmailError(Exception):
+    pass
+
+
+def check(line):
+    name, mail, age = line.split(' ')
+    symbols = ('@', '.')
+    age = int(age)
+    if name.isalpha() is False:
+        raise NotNameError
+    elif age not in range(10, 100):
+        raise ValueError()
     else:
-        if not i_elem[0].isalpha():
-            bad_logs.write(str(i_elem[0] + ' ' + i_elem[1] + ' ' + i_elem[2])
-                           + ' ' * 8 + 'поле имени содержит НЕ только буквы: NameError\n')
-        elif '@' and '.' not in i_elem[1]:
-            bad_logs.write(str(i_elem[0] + ' ' + i_elem[1] + ' ' + i_elem[2])
-                           + ' ' * 8 + 'поле емейл НЕ содержит @ и .(точку): SyntaxError\n')
-        elif not 10 < int(i_elem[2]) < 99:
-            bad_logs.write(str(i_elem[0] + ' ' + i_elem[1] + ' ' + i_elem[2])
-                           + ' ' * 8 + 'поле возраст НЕ является числом от 10 до 99: ValueError\n')
+        for char in symbols:
+            if char not in mail:
+                raise NotEmailError
+    return line
+
+
+with open('registrations_.txt', mode='r', encoding='utf-8') as ff:
+    for line in ff:
+        line = line[:-1]
+        try:
+            string = check(line)
+        except NotNameError:
+            bad = open('registration_bad.log', mode='a', encoding='utf-8')
+            bad.write(line + 'Имя содержит цифры' + '\n')
+            bad.close()
+        except NotEmailError:
+            bad = open('registration_bad.log', mode='a', encoding='utf-8')
+            bad.write(line + 'Некорректно указан E-mail' + '\n')
+            bad.close()
+        except ValueError:
+            bad = open('registration_bad.log', mode='a', encoding='utf-8')
+            bad.write(line + 'Неверные данные' + '\n')
+            bad.close()
         else:
-            good_logs.write(str(i_elem[0] + ' ' + i_elem[1] + ' ' + i_elem[2]) + '\n')
-
-
-fh.close()
-good_logs.close()
-bad_logs.close()
+            good = open('registraton_good.log', mode='a', encoding='utf-8')
+            good.write(line + '\n')
+            good.close()
