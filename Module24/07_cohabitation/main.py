@@ -19,7 +19,8 @@ class Person:
 
     def eat(self):
         self.satiety += 1
-        House.food -= 1
+        House.food -= 1  # TODO еды может и не быть, поэтому перед вычитанием надо делать проверку наличия ограниченного
+                         #  ресурса (аналогично далее для денег)
         return f'ест, сытость {self.satiety} еда {House.food}'
 
     def work(self):
@@ -37,6 +38,9 @@ person_2 = Person('Федя')
 count = 0
 
 for i in range(365):
+    # TODO добавьте метод "действовать" в класс Человек, куда поместите всю эту логику ниже. В цикле надо вызывать
+    #  только методы "действовать" для каждого жителя и вывод статуса
+
     count += 1
     number_cubes = randint(1, 6)
     person = choice([person_1, person_2])
@@ -55,6 +59,7 @@ for i in range(365):
         text = person.eat()
     else:
         text = person.play()
-    print(person.name, text)
+    print(person.name, text)  # TODO а эту строку кода вынесите в метод в классе Человек для вывода в консоль статуса
+                              #  объекта
 
 print('Выжили!' if count == 365 else 'Все плохо!')

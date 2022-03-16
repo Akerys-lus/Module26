@@ -1,6 +1,8 @@
 class Parent:
     def __init__(self, name, age, childs):
         self.name, self.age, self.childs = name, age, childs
+        # TODO до присваивания списка детей атрибуту необходимо проверить список на соответствие ограничения по возрасту
+        #  указанному в задании
 
     def __str__(self):
         return self.name + ' ' + str(self.age) + '\n' + \

@@ -5,6 +5,8 @@ class Student:
         self.group_number = group_number
         self.progress = progress
         self.average = sum(progress) / len(progress)
+        # TODO вместо атрибута удобнее иметь метод расчёта среднего балла,
+        #  тогда при запросах среднего балла через метод, если оценок прибавится, то средний бал будет актуальным
 
     def give_average(self):
         return self.average
