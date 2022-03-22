@@ -1,31 +1,82 @@
-class Element:
-
-    def __init__(self, elem):
-        if elem in ("Вода", "Воздух", "Огонь", "Земля", "Шторм", "Грязь", "Пыль", "Лава", "Молния", "Пар"):
-            self.name = elem
-        else:
-            raise ValueError
-
-    def __repr__(self):
-        return "§<" + self.name + ">§"
+class Fire:
+    title = 'Огонь'
 
     def __add__(self, other):
-        if {self.name, other.name} == {"Вода", "Воздух"}:
-            return Element("Шторм")
-        if {self.name, other.name} == {"Вода", "Огонь"}:
-            return Element("Пар")
-        if {self.name, other.name} == {"Вода", "Земля"}:
-            return Element("Грязь")
-        if {self.name, other.name} == {"Воздух", "Огонь"}:
-            return Element("Молния")
-        if {self.name, other.name} == {"Воздух", "Земля"}:
-            return Element("Пыль")
-        if {self.name, other.name} == {"Огонь", "Земля"}:
-            return Element("Лава")
-        raise ValueError
+        if isinstance(other, Air):
+            return Lightning()
+        elif isinstance(other, Water):
+            return Steam()
+        elif isinstance(other, Earth):
+            return Lava()
 
 
-elem1, elem2 = input('Введите 2-а вида стихий из возможных(Вода, Огонь, Земля, Воздух): ').strip().split(' ')
-sum_elem = Element(elem1) + Element(elem2)
+class Air:
+    title = 'Воздух'
 
-print(elem1, "+", elem2, "=", sum_elem)
+    def __add__(self, other):
+        if isinstance(other, Water):
+            return Storm()
+        elif isinstance(other, Fire):
+            return Lightning()
+        elif isinstance(other, Earth):
+            return Dust()
+
+
+class Water:
+    title = 'Вода'
+
+    def __add__(self, other):
+        if isinstance(other, Air):
+            return Storm()
+        elif isinstance(other, Fire):
+            return Steam()
+        elif isinstance(other, Earth):
+            return Dirt()
+
+
+class Earth:
+    title = 'Земля'
+
+    def __add__(self, other):
+        if isinstance(other, Water):
+            return Dirt()
+        elif isinstance(other, Fire):
+            return Lava()
+        elif isinstance(other, Air):
+            return Dust()
+
+
+class Storm:
+    title = 'Шторм'
+
+
+class Steam:
+    title = 'Пар'
+
+
+class Dirt:
+    title = 'Грязь'
+
+
+class Lightning:
+    title = 'Молния'
+
+
+class Dust:
+    title = 'Пыль'
+
+
+class Lava:
+    title = 'Лава'
+
+
+def elemental():
+    try:
+        elem1, elem2 = Water(), Fire()
+        sum_elem = elem1 + elem2
+        return f"Смешиваем '{elem1.title}' c '{elem2.title}' и получаем '{sum_elem.title}'."
+    except NameError:
+        return None
+
+
+print(elemental())

@@ -30,6 +30,7 @@ class Child:
 
 child_info = Child('Саша', 7, True, False)
 parents_info = Parent('Иван', 30, [child_info])
-
-print(parents_info)
-
+if child_info.age + 16 < parents_info.age:
+    print(parents_info)
+else:
+    raise ValueError('Не правильно указан возраст!')

@@ -7,9 +7,12 @@ class House:
 
 
 def repast():
-    House.food += 1
-    House.money -= 1
-    return f'идет в магазин, еда {House.food} деньги {House.money}'
+    if House.money > 0:
+        House.food += 1
+        House.money -= 1
+        return f'идет в магазин, еда {House.food} деньги {House.money}'
+    else:
+        raise CountError('Закончились деньги!')
 
 
 class Person:
@@ -19,30 +22,36 @@ class Person:
 
     def eat(self):
         self.satiety += 1
-        House.food -= 1
-        return f'ест, сытость {self.satiety} еда {House.food}'
+        if House.food > 0:
+            House.food -= 1
+            return f'ест, сытость {self.satiety} еда {House.food}'
+        else:
+            raise CountError('Еды больше нет!')
 
     def work(self):
-        self.satiety -= 1
-        House.money += 1
-        return f'работает, сытость {self.satiety} деньги {House.money}'
+        if self.satiety > 0:
+            self.satiety -= 1
+            House.money += 1
+            return f'работает, сытость {self.satiety} деньги {House.money}'
+        else:
+            raise CountError('Погибли от голода!')
 
     def play(self):
-        self.satiety -= 1
-        return f'играет, сытость {self.satiety}'
+        if self.satiety > 0:
+            self.satiety -= 1
+            return f'играет, сытость {self.satiety}'
+        else:
+            raise CountError('Погибли от голода!')
 
 
 person_1 = Person('Вася')
 person_2 = Person('Федя')
-count = 0
 
-for i in range(365):
-    count += 1
+
+def test_life(person):
     number_cubes = randint(1, 6)
-    person = choice([person_1, person_2])
     if person.satiety < 0:
-        print(f'К сожалению, {person.name} погиб от голода')
-        break
+        raise CountError(f'К сожалению, {person.name} помер с голоду ')
     if person.satiety < 20 and House.food >= 10:
         text = person.eat()
     elif House.food < 10:
@@ -57,4 +66,9 @@ for i in range(365):
         text = person.play()
     print(person.name, text)
 
-print('Выжили!' if count == 365 else 'Все плохо!')
+
+for i in range(365):
+    test_life(person_1)
+    test_life(person_2)
+    if i == 364:
+        print('Выжили')
