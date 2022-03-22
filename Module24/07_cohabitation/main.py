@@ -72,3 +72,4 @@ for i in range(365):
     test_life(person_2)
     if i == 364:
         print('Выжили')
+

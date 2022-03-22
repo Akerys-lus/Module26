@@ -40,3 +40,4 @@ print('студенты с оценками 4 и 5')
 for student in list_student:
     if student.good():
         print(student)
+
