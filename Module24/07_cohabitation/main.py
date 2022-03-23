@@ -12,7 +12,7 @@ def repast():
         House.money -= 1
         return f'идет в магазин, еда {House.food} деньги {House.money}'
     else:
-        raise CountError('Закончились деньги!')
+        raise CountError('Закончились деньги!')  # TODO такой класс исключения надо определить
 
 
 class Person:
@@ -42,13 +42,14 @@ class Person:
             return f'играет, сытость {self.satiety}'
         else:
             raise CountError('Погибли от голода!')
+    # TODO добавьте метод __str__ для вывода статуса человека
 
 
 person_1 = Person('Вася')
 person_2 = Person('Федя')
 
 
-def test_life(person):
+def test_life(person):  # TODO перенесите эту функцию в класс Человек, назовите "действовать" (act)
     number_cubes = randint(1, 6)
     if person.satiety < 0:
         raise CountError(f'К сожалению, {person.name} помер с голоду ')
@@ -70,6 +71,8 @@ def test_life(person):
 for i in range(365):
     test_life(person_1)
     test_life(person_2)
-    if i == 364:
-        print('Выжили')
+    # TODO выводите также и статус человека - сколько у него сытости, настроения и т.д.
+    # if i == 364:  # TODO зачем? Достаточно вывести сообщение после цикла
+    #    print('Выжили')
+print('Выжили')
 

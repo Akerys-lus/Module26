@@ -1,5 +1,6 @@
 class Parent:
     def __init__(self, name, age, childs):
+        # TODO Именно тут надо проитерировать по списку объектов детей и проверить допустимость их возраста
         self.name, self.age, self.childs = name, age, childs
 
     def __str__(self):
@@ -30,7 +31,7 @@ class Child:
 
 child_info = Child('Саша', 7, True, False)
 parents_info = Parent('Иван', 30, [child_info])
-if child_info.age + 16 < parents_info.age:
+if child_info.age + 16 < parents_info.age:  # TODO эта логика должна быть в классе Родитель (с циклом по списку детей)
     print(parents_info)
 else:
     raise ValueError('Не правильно указан возраст!')

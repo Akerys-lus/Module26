@@ -4,10 +4,11 @@ class Student:
         self.full_name = full_name
         self.group_number = group_number
         self.progress = progress
-        self.average = average
+        # self.average = average  todo значение не определено
 
-    def give_average(self, progress):
-        return self.average == sum(progress) / len(progress)
+    def give_average(self):  #, progress):  TODO параметр не нужен
+        # return self.average == sum(progress) / len(progress)   todo и сравнивать не с чем и не нужно
+        return sum(self.progress) / len(self. progress)  # TODO вот так
 
     def __str__(self):
         return f'{self.full_name} {self.group_number}'
@@ -24,7 +25,7 @@ def receiving_data():
     return name, group, ball
 
 
-list_student = [Student(*receiving_data()) for _ in range(10)]
+list_student = [Student(*receiving_data()) for _ in range(2)]
 print('список студентов')
 for student in list_student:
     print(student)
