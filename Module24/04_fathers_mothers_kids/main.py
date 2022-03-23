@@ -1,6 +1,9 @@
 class Parent:
     def __init__(self, name, age, childs):
         self.name, self.age, self.childs = name, age, childs
+        for i_child in [child_info, child_info2]:
+            if i_child.age + 16 > self.age:
+                raise ValueError('Значение "лет" не подходит к требованиям!')
 
     def __str__(self):
         return self.name + ' ' + str(self.age) + '\n' + \
@@ -29,8 +32,7 @@ class Child:
 
 
 child_info = Child('Саша', 7, True, False)
-parents_info = Parent('Иван', 30, [child_info])
-if child_info.age + 16 < parents_info.age:
-    print(parents_info)
-else:
-    raise ValueError('Не правильно указан возраст!')
+child_info2 = Child('Паша', 8, False, True)
+parents_info = Parent('Иван', 30, [child_info, child_info2])
+
+print(parents_info)

@@ -4,10 +4,9 @@ class Student:
         self.full_name = full_name
         self.group_number = group_number
         self.progress = progress
-        self.average = average
 
-    def give_average(self, progress):
-        return self.average == sum(progress) / len(progress)
+    def give_average(self):
+        return sum(self.progress) / len(self.progress)
 
     def __str__(self):
         return f'{self.full_name} {self.group_number}'
