@@ -1,5 +1,6 @@
 class Parent:
-    def __init__(self, name, age, childs):
+    def __init__(self, name, age, childs):  # TODO Слово "дети" во множественном числе это children, а child не имеет
+                                            #  формы множественного числа
         self.name, self.age, self.childs = name, age, childs
         for i_child in [child_info, child_info2]:
             if i_child.age + 16 > self.age:

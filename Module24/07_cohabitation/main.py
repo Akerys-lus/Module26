@@ -1,6 +1,10 @@
 from random import randint, choice
 
 
+class CountError(Exception):  # TODO вот так создаются кастомные исключения
+    pass
+
+
 class House:
     food = 50
     money = 0
