@@ -26,7 +26,10 @@ class Automobile:
         Attributes:
             new_dist (float): пользователь вводит кол-во км. которые проедет автомобиль
         """
-        new_dist = float(input('Сколько км. проехал автомобиль?: '))
+        new_dist = float(input('Сколько км. проехал автомобиль?: '))  # TODO более практично с точки зрения дальнейшего
+        # переиспользования класса, не привязывать код класса к конкретному вводу/выводу (тут - к консоли), тогда класс
+        # можно использовать и в проектах с другим интерфейсом. Запросит нужные данные у пользователя в основном коде
+        # программы, а методу передавайте это значение через параметр
         if new_dist < 0:
             raise ValueError('Введено неправильное значение!')
         self.x = self.x + new_dist * math.cos(self.fi)
@@ -58,13 +61,16 @@ class Bus(Automobile):
         :raise ValueError: если величина перемещения автомобиля отрицательная
         :raise Exception: если введено что-то кроме (yes, no, no_changes)
         """
-        new_dist = float(input('Сколько км. проехал автобус?: '))
+        new_dist = float(input('Сколько км. проехал автобус?: '))  # TODO Аналогично предыдущему
         if new_dist < 0:
             raise ValueError('Введено неправильное значение!')
         self.x = self.x + new_dist * math.cos(self.fi)
         self.y = self.y + new_dist * math.sin(self.fi)
         self.dist += new_dist
-        question = input('Пассажиры вошли или вышли(yes/no/no_changes)?: ')
+        # TODO чтобы не дублировать код расчёта новых координат - вызовите метод базового класса (используйте super())
+        question = input('Пассажиры вошли или вышли(yes/no/no_changes)?: ')  # TODO зачем это в методе "перемещение"?
+        # Нужно только расчитать стоимость провоза имеющихся пассажирова на заданное расстояние и увеличить значение
+        # атрибута self.all_money
         if question == 'yes':
             Buss.to_come_in(new_dist)
         elif question == 'no':

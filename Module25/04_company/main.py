@@ -8,6 +8,7 @@ from random import randint, choice
 
 Names = ['Алексей', 'Женя', 'Иван', 'Петр', 'Семен', 'Антон', 'Максим']
 Surnames = ['Первый', 'Второй', 'Третий', 'Четвертый', 'Пятый']
+# TODO имена констант пишутся большими буквами: NAMES
 
 
 def generate_person():
@@ -84,7 +85,7 @@ class Agent(Employee):
 
         :return: зарплата Агента
         """
-        return 5000 + .05 * self.sales
+        return 5000 + .05 * self.sales  # TODO передавайте значение "продаж" через параметр метода
 
 
 class Worker(Employee):
@@ -99,7 +100,7 @@ class Worker(Employee):
 
         :return: зарплата рабочего
         """
-        return 100 * self.hours
+        return 100 * self.hours  # TODO Аналогично предыдущему для hours
 
 
 if __name__ == '__main__':
