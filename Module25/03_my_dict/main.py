@@ -13,7 +13,7 @@ class MyDict(dict):
         :return: ключ со значением 0
         """
         return dict.get(self, key, default)  # TODO сделаем более популярным способом:
-                                             #  return self.get(key, 0)
+                                             #  return super().get(key, 0)
 
 
 a = dict(a=1, b=2)
