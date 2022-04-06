@@ -1,6 +1,26 @@
 import random
 
 
+class KillError(Exception):
+    pass
+
+
+class DrunkError(Exception):
+    pass
+
+
+class CarCrashError(Exception):
+    pass
+
+
+class GluttonyError(Exception):
+    pass
+
+
+class DepressionError(Exception):
+    pass
+
+
 class Buddhist:
     """"
     Базовый класс Буддист
@@ -8,6 +28,7 @@ class Buddhist:
     Args:
         karma (int): передает кол-во кармы человека
     """
+
     def __init__(self, karma=0):
         self.karma = karma
 
@@ -28,18 +49,34 @@ class Buddhist:
         :type: int
         """
         self.karma += enlightenment
-        buddhist.get_karma()
+
+
+def check(num):
+    if num != 1:
+        num_exc = random.randint(1, 5)
+        if num_exc == 1:
+            raise KillError('Совершил убийство.')
+        if num_exc == 2:
+            raise DrunkError('Выпил слишком много.')
+        if num_exc == 3:
+            raise CarCrashError('Попал в аварию.')
+        if num_exc == 4:
+            raise GluttonyError('Переел.')
+        if num_exc == 5:
+            raise DepressionError('Впал в депрессию.')
 
 
 def one_day(count):
-    if random.randint(1, 10) == 1:
-        with open('karma.log', 'a', encoding='utf8') as karma_log:
-            misconduct = random.choice(['KillError', 'DrunkError',
-                                        'CarCrashError', 'GluttonyError', 'DepressionError'])
+    with open('karma.log', 'a', encoding='utf8') as karma_log:
+        try:
+            random_num = random.randint(1, 10)
+            check(random_num)
+        except (KillError, DrunkError, CarCrashError, GluttonyError, DepressionError) as exc:
+            misconduct = f'{exc.__class__.__name__}'
             karma_log.write(f'День {count}: поступок {misconduct}\n')
             return False
-    else:
-        return random.randint(1, 7)
+        else:
+            return random.randint(1, 7)
 
 
 buddhist = Buddhist()

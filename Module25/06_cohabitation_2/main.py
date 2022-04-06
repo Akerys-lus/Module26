@@ -38,64 +38,6 @@ class House:
     def __init__(self, family):
         self.family = family
 
-    def life(self):
-        """
-        Геттер отвечающий за выполнение ежедневных действий жильцами
-
-        """
-        for i_resident in self.family:
-            if House.dirt >= 90 and not isinstance(i_resident, Cat):
-                i_resident.happiness -= 10
-            if isinstance(i_resident, Cat) and House.cat_food >= 20 <= i_resident.satiety:
-                cat.eat()
-                print('Кот поел')
-                House.cat_eat += 10
-            elif isinstance(i_resident, Cat):
-                if random.randint(1, 2) == 1:
-                    House.dirt += 5
-                    print('Кот содрал обои')
-                else:
-                    cat.satiety -= 10
-                    print('Кот спит')
-            elif House.food >= 60 and i_resident.satiety <= 30:
-                i_resident.eat()
-                print(i_resident.name, 'поел')
-                House.food_eaten += 30
-            elif isinstance(i_resident, Husband):
-                if House.many <= 150:
-                    husband.work_day()
-                    print('экстренная работа')
-                    House.earned += 150
-                elif husband.happiness <= 50:
-                    husband.game()
-                    print('Расслабляется')
-                elif husband.happiness <= 70:
-                    husband.petting_cat()
-                    print('Гладит кота')
-                else:
-                    husband.work_day()
-                    print('Обычная работа')
-                    House.earned += 150
-            elif isinstance(i_resident, Wife):
-                if House.food <= 60 and House.many > 100:
-                    buy_food()
-
-                elif House.cat_food <= 20:
-                    buy_cat_food()
-                elif House.dirt >= 50:
-                    wife.cleaning()
-                    print("Уборка")
-                elif wife.happiness <= 70:
-                    wife.petting_cat()
-                    print('Гладит кота')
-                elif House.many > 450:
-                    wife.purchase()
-                    print('Покупка шубы')
-                    House.fur_coat += 1
-                else:
-                    wife.petting_cat()
-                    print('Гладит кота')
-
 
 class Residents:
     """
@@ -106,6 +48,7 @@ class Residents:
         satiety (int): передает величину сытости
         happiness (int): передает величину счастья
     """
+
     def __init__(self, name=None, satiety=None, happiness=None):
         self.name = name
         self.satiety = satiety
@@ -126,6 +69,7 @@ class Husband(Residents):
         happiness (int): передает величину счастья мужа
         work (int): передает кол-во денег за работу мужа
     """
+
     def __init__(self, name, satiety=30, happiness=100, work=150):
         super().__init__(name, satiety, happiness)
         self.work = work
@@ -142,6 +86,28 @@ class Husband(Residents):
     def game(self):
         self.happiness += 20
         self.satiety -= 10
+
+    def act(self):
+        if House.many <= 150:
+            husband.work_day()
+            print('Экстренная работа')
+            House.earned += 150
+        elif husband.happiness <= 50:
+            husband.game()
+            print('Расслабляется')
+        elif husband.happiness <= 70:
+            husband.petting_cat()
+            print('Гладит кота')
+        else:
+            husband.work_day()
+            print('Обычная работа')
+            House.earned += 150
+        if House.dirt >= 90:
+            i_resident.happiness -= 10
+        elif House.food >= 60 and self.satiety <= 30:
+            Residents.eat(self)
+            print(self.name, 'поел')
+            House.food_eaten += 30
 
 
 def buy_food():
@@ -163,6 +129,7 @@ class Wife(Residents):
         satiety (int): передает величину сытости жены
         happiness (int): передает величину счастья жены
     """
+
     def __init__(self, name, satiety=30, happiness=100):
         super().__init__(name, satiety, happiness)
 
@@ -179,6 +146,29 @@ class Wife(Residents):
         House.dirt -= 100
         self.satiety -= 10
 
+    def act(self):
+        if House.food <= 60 and House.many > 100:
+            buy_food()
+        elif House.cat_food <= 20:
+            buy_cat_food()
+        elif House.dirt >= 50:
+            wife.cleaning()
+            print("Уборка")
+        elif wife.happiness <= 70:
+            wife.petting_cat()
+            print('Гладит кота')
+        elif House.many > 450:
+            wife.purchase()
+            print('Покупка шубы')
+            House.fur_coat += 1
+        else:
+            wife.petting_cat()
+            print('Гладит кота')
+        if House.food >= 60 and self.satiety <= 30:
+            Residents.eat(self)
+            print(self.name, 'поела')
+            House.food_eaten += 30
+
 
 def shitting():
     House.dirt += 5
@@ -192,12 +182,25 @@ class Cat(Residents):
         name (str): передает имя кота
         satiety (int): передает величину сытости кота
     """
+
     def __init__(self, name, satiety=30):
         super().__init__(name, satiety)
 
     def eat(self):
         self.satiety += 20
         House.cat_food -= 10
+
+    def act(self):
+        if House.cat_food >= 20 <= self.satiety:
+            cat.eat()
+            print('Кот поел')
+            House.cat_eat += 10
+        if random.randint(1, 2) == 1:
+            House.dirt += 5
+            print('Кот содрал обои')
+        else:
+            cat.satiety -= 10
+            print('Кот спит')
 
 
 def life_dead(family):
@@ -234,6 +237,8 @@ for i_day in range(1, 365):
         print(f'\nBce живы')
         break
     else:
-        house.life()
-print(f'\nЗа год: \nкуплено шуб: {House.fur_coat}' f'\nЗаработано: {House.earned}'
+        husband.act()
+        wife.act()
+        cat.act()
+print(f'\nЗа год: \nКуплено шуб: {House.fur_coat}' f'\nЗаработано: {House.earned}'
       f' \nСъедено: {House.food_eaten}\nКот съел: {House.cat_eat}')

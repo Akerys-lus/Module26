@@ -19,14 +19,14 @@ class Automobile:
         return f'Автомобиль проехал {self.dist}км.' \
                f'\nАвтомобиль, в настоящее время, расположен в точке (х:{self.x}, у:{self.y}).'
 
-    def move(self):
+    def move(self, new_dist):
         """
         Геттер для перемещения автомобиля
 
-        Attributes:
-            new_dist (float): пользователь вводит кол-во км. которые проедет автомобиль
+        :param new_dist: кол-во км. которое проедет автобус
+        :rtype: float
+        :raise ValueError: если величина перемещения автомобиля отрицательная
         """
-        new_dist = float(input('Сколько км. проехал автомобиль?: '))
         if new_dist < 0:
             raise ValueError('Введено неправильное значение!')
         self.x = self.x + new_dist * math.cos(self.fi)
@@ -41,79 +41,49 @@ class Bus(Automobile):
         super().__init__(x, y, fi)
 
     def __str__(self):
-        return f'Автобус проехал {self.dist} км. \nВодитель заработал {self.all_money} р.' \
-               f' \nКол-во пассажиров - {self.filled_places}.\nАвтобус, в настоящее время находиться' \
+        return f'Автобус проехал - {self.dist} км. \nВодитель заработал - {self.all_money} р.' \
+               f' \nКол-во пассажиров - {self.filled_places} чел.\nАвтобус, в настоящее время находиться' \
                f'в точке (х:{self.x}, у:{self.y}).'
 
-    def move(self):
+    def move(self, new_dist):
         """
         Геттер для перемещения автомобиля
-
-        Attributes:
-        new_dist (float): пользователь вводит кол-во км. которые проедет автомобиль
-        question (str): пользователь может изменить кол-во пассажиров(yes - увеличить,
-            no - уменьшить, no_changes - не изменять)
-        money (float): кол-во денег полученных с пассажиров за проезд
 
         :raise ValueError: если величина перемещения автомобиля отрицательная
         :raise Exception: если введено что-то кроме (yes, no, no_changes)
         """
-        new_dist = float(input('Сколько км. проехал автобус?: '))
         if new_dist < 0:
             raise ValueError('Введено неправильное значение!')
         self.x = self.x + new_dist * math.cos(self.fi)
         self.y = self.y + new_dist * math.sin(self.fi)
+        self.all_money += self.filled_places * new_dist * self.fare
         self.dist += new_dist
-        question = input('Пассажиры вошли или вышли(yes/no/no_changes)?: ')
-        if question == 'yes':
-            Buss.to_come_in(new_dist)
-        elif question == 'no':
-            Buss.go_out(new_dist)
-        elif question == 'no_changes':
-            money = self.filled_places * new_dist * self.fare
-            self.all_money += money
-        else:
-            raise Exception('Ошибка ввода.')
 
-    def to_come_in(self, new_dist):
+    def to_come_in(self, passengers):
         """
         Геттер для увеличения числа пассажиров
 
-        Attributes:
-            passengers (int): кол-во пассажиров
-            money (float): кол-во полученных водителем денег
-
-        :param new_dist: кол-во км. которое проедет автобус
-        :rtype: float
+        :param passengers: кол-во пассажиров
+        :rtype: int
         :raise ValueError: введено неверное число пассажиров
         """
-        passengers = int(input('Сколько людей зашло в автобус?: '))
         if passengers > self.filled_places - self.free_places:
             self.free_places -= passengers
             self.filled_places += passengers
-            money = self.filled_places * new_dist * self.fare
-            self.all_money += money
         else:
             raise ValueError('Указано неверное число пассажиров!')
 
-    def go_out(self, new_dist):
+    def go_out(self, passengers):
         """
         Геттер для уменьшения числа пассажиров
 
-        Attributes:
-            passengers (int): кол-во пассажиров
-            money (float): кол-во полученных водителем денег
-
-        :param new_dist: кол-во км. которое проедет автобус
-        :rtype float
+        :param passengers: кол-во пассажиров
+        :rtype: int
         :raise ValueError: введено неверное число пассажиров
         """
-        passengers = int(input('Сколько людей вышло из автобуса?: '))
         if passengers > self.filled_places - self.free_places:
             self.free_places += passengers
             self.filled_places -= passengers
-            money = self.filled_places * new_dist * self.fare
-            self.all_money += money
         else:
             raise ValueError('Указано неверное число пассажиров!')
 
@@ -121,9 +91,23 @@ class Bus(Automobile):
 Auto = Automobile(3, 4, 90)
 Buss = Bus(10, 10, 10)
 
-Auto.move()
+new_distance = float(input('Сколько км. проехал автомобиль?: '))
+if new_distance < 0:
+    raise Exception('Автомобиль не может проехать отрицательное кол-во км.')
+Auto.move(new_distance)
 print(Auto)
-Buss.move()
-print(Buss)
-Buss.move()
-print(Buss)
+
+count_stop = int(input('Сколько остановок проедет автобус?: '))
+for i_stop in range(count_stop):
+    question = input('Пассажиры вошли или вышли(yes/no)?: ')
+    new_dist_bus = float(input('Сколько км. проехал автобус?: '))
+    if question == 'yes':
+        passengers_bus = int(input('Сколько пассажиров вошло?: '))
+        Buss.to_come_in(passengers_bus)
+    elif question == 'no':
+        passengers_bus = int(input('Сколько пассажиров вышло?: '))
+        Buss.go_out(passengers_bus)
+    else:
+        raise Exception('Ошибка ввода.')
+    Buss.move(new_dist_bus)
+    print(Buss)
