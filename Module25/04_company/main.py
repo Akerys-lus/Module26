@@ -37,6 +37,10 @@ class Person:
         self.__name = name
         self.__surname = surname
         self.__age = age
+        self.amount = 1
+
+    def set_amount(self, amount):
+        self.amount = amount
 
     def __str__(self):
         return f'Меня зовут {self.__name} {self.__surname}. Мой возраст - {self.__age}'
@@ -85,7 +89,7 @@ class Agent(Employee):
 
         :return: зарплата Агента
         """
-        return 5000 + .05 * self.sales  # TODO передавайте значение "продаж" через параметр метода
+        return 5000 + .05 * self.amount
 
 
 class Worker(Employee):
@@ -100,7 +104,7 @@ class Worker(Employee):
 
         :return: зарплата рабочего
         """
-        return 100 * self.hours  # TODO Аналогично предыдущему для hours
+        return 100 * self.amount
 
 
 if __name__ == '__main__':
@@ -111,12 +115,12 @@ if __name__ == '__main__':
 
     for _ in range(3):
         agent = Agent(*generate_person())
-        agent.sales = randint(2000, 10000)
+        agent.set_amount(randint(2000, 10000))
         employees.append(agent)
 
     for _ in range(3):
         worker = Worker(*generate_person())
-        worker.hours = randint(20, 50)
+        worker.set_amount(randint(20, 50))
         employees.append(worker)
 
     for emp in employees:
