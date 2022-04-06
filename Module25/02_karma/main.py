@@ -90,3 +90,4 @@ while buddhist.get_karma() < 500:
         buddhist.set_karma(one_day(day))
 
 print('Вы достигли просветления.')
+

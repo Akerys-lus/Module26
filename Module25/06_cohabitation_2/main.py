@@ -242,3 +242,4 @@ for i_day in range(1, 365):
         cat.act()
 print(f'\nЗа год: \nКуплено шуб: {House.fur_coat}' f'\nЗаработано: {House.earned}'
       f' \nСъедено: {House.food_eaten}\nКот съел: {House.cat_eat}')
+

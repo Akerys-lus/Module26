@@ -15,3 +15,4 @@ class MyDict(dict):
 
 a = dict(a=1, b=2)
 b = MyDict(a=1, b=2)
+

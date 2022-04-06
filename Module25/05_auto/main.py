@@ -111,3 +111,4 @@ for i_stop in range(count_stop):
         raise Exception('Ошибка ввода.')
     Buss.move(new_dist_bus)
     print(Buss)
+
