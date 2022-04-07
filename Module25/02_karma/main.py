@@ -54,6 +54,8 @@ class Buddhist:
 def check(num):
     if num != 1:
         num_exc = random.randint(1, 5)
+        # TODO вполне можно было сохранить список, только не строк, а объектов исключений, и выбирать случайный элемен
+        #  с помощью random.choice
         if num_exc == 1:
             raise KillError('Совершил убийство.')
         if num_exc == 2:

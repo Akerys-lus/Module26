@@ -54,10 +54,14 @@ class Bus(Automobile):
         """
         if new_dist < 0:
             raise ValueError('Введено неправильное значение!')
+
         self.x = self.x + new_dist * math.cos(self.fi)
         self.y = self.y + new_dist * math.sin(self.fi)
-        self.all_money += self.filled_places * new_dist * self.fare
         self.dist += new_dist
+        # TODO Повторно: вызовите метод базового класса super().move(new_dist) чтобы не дублировать код расчёта
+        #  новых координат
+
+        self.all_money += self.filled_places * new_dist * self.fare
 
     def to_come_in(self, passengers):
         """

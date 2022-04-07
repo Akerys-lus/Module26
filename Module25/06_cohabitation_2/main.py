@@ -103,7 +103,7 @@ class Husband(Residents):
             print('Обычная работа')
             House.earned += 150
         if House.dirt >= 90:
-            i_resident.happiness -= 10
+            i_resident.happiness -= 10  # TODO self должен быть место i_resident
         elif House.food >= 60 and self.satiety <= 30:
             Residents.eat(self)
             print(self.name, 'поел')
