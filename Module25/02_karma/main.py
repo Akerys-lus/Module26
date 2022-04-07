@@ -53,17 +53,9 @@ class Buddhist:
 
 def check(num):
     if num != 1:
-        num_exc = random.randint(1, 5)
-        if num_exc == 1:
-            raise KillError('Совершил убийство.')
-        if num_exc == 2:
-            raise DrunkError('Выпил слишком много.')
-        if num_exc == 3:
-            raise CarCrashError('Попал в аварию.')
-        if num_exc == 4:
-            raise GluttonyError('Переел.')
-        if num_exc == 5:
-            raise DepressionError('Впал в депрессию.')
+        raise random.choice((KillError('Совершил убийство.'), DrunkError('Выпил слишком много.'),
+                             CarCrashError('Попал в аварию.'), GluttonyError('Переел.'),
+                             DepressionError('Впал в депрессию.')))
 
 
 def one_day(count):
@@ -90,4 +82,3 @@ while buddhist.get_karma() < 500:
         buddhist.set_karma(one_day(day))
 
 print('Вы достигли просветления.')
-

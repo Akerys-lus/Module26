@@ -54,8 +54,7 @@ class Bus(Automobile):
         """
         if new_dist < 0:
             raise ValueError('Введено неправильное значение!')
-        self.x = self.x + new_dist * math.cos(self.fi)
-        self.y = self.y + new_dist * math.sin(self.fi)
+        super().move(new_dist)
         self.all_money += self.filled_places * new_dist * self.fare
         self.dist += new_dist
 
